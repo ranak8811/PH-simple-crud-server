@@ -1,5 +1,8 @@
 const express = require("express");
 const cors = require("cors");
+
+require("dotenv").config(); // to secure mongodb credential
+
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const port = process.env.PORT || 4000;
 
@@ -8,16 +11,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Mongodb Atlas information
-
-// username
-// ranakrphone
-
-// password
-// BaghYiksHkaO989r
-
-const uri =
-  "mongodb+srv://ranakrphone:BaghYiksHkaO989r@cluster0.j5yqq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.j5yqq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
